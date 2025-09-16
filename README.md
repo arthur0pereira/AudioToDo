@@ -24,7 +24,7 @@ Instalação e Uso
 Siga os passos abaixo para ter uma cópia local em execução para testes e desenvolvimento.
 
 Clone o repositório:
-git clone https://github.com/seu-usuario/AudioToDo.git
+git clone https://github.com/arthur0pereira/AudioToDo.git
 
 Acesse a pasta do projeto:
 cd AudioToDo
