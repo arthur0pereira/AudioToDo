@@ -1,28 +1,24 @@
 <?php
 namespace generic;
 
-use controller\UsuarioController;
-class AppController {
-
-    public function handleRequest() {
-        $requestUri = $_SERVER['REQUEST_URI'];
-        $path = parse_url($requestUri, PHP_URL_PATH);
-        
-        $routes = [
-            '/usuario/cadastro' => ['controller' => 'UsuarioController', 'method' => 'store'],
+class Controller {
+    private $arrChamadas = [];
+    public function __construct($arrChamadas) {
+        $this->arrChamadas = [
+            "suario/cadastrar" => new Acao("UsuarioController", "store"),
+            "usuario/login" => new Acao("UsuarioController", "login"),
+            "usuario/editar" => new Acao("UsuarioController", "update"),
+            "usuario/logout" => new Acao("UsuarioController", "logout"),
         ];
-        
-        if (array_key_exists($path, $routes)) {
-            $route = $routes[$path];
-            $controllerName = $route['controller'];
-            $methodName = $route['method'];
-            
-            $controller = new $controllerName();
-            $controller->$methodName();
-            
-        } else {
-            http_response_code(404);
-            echo "Página não encontrada!";
+    }
+
+    public function verificarChamadas($rota){
+
+        if(isset($this->arrChamadas[$rota])){
+            $acao = $this->arrChamadas[$rota];
+            $acao->executar();
+            return ;
         }
+        echo "Rota não encontrada.";
     }
 }
