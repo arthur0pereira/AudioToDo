@@ -1,43 +1,58 @@
 <?php 
-namespace generic; 
 
-use service\UsuarioService;
-use template\UsuarioTemp;
-use template\Itemplate;
+require_once "generic/Controller.php";
+require_once "service/UsuarioService.php";
 
-class UsuarioController {
-        
-    private UsuarioService $usuarioService;
-    private ITemplate $template;
-    
-    public function __construct(){
-        $this->template = new UsuarioTemp();
+use Generic\Controller;
+
+class UsuarioController extends Controller
+{
+    private $usuarioService;
+
+    public function __construct()
+    {
+        $this->usuarioService = new UsuarioService();
+        session_start();
     }
 
-    // public function listar(){
-    //     $service = new UsuarioService();
-    //     $resultado = $service->listarUsuarios();
-    //     $this->template->layout("\\public\\Usuario\\listar.php", $resultado);
-    // }
+    public function form()
+    {
+        $this->render("Usuario/form");
+    }
 
-    public function inserir(){
+    public function salvar()
+    {
         $nome = $_POST['nome'] ?? '';
         $email = $_POST['email'] ?? '';
         $senha = $_POST['senha'] ?? '';
-        $service = new UsuarioService();
-        $service->cadastrarUsuario($nome, $email, $senha);
-        header('Location: public/Usuario/cadastrar.php');
+
+        $resultado = $this->usuarioService->cadastrarUsuario($nome, $email, $senha);
+        if ($resultado['status']) {
+            $this->redirect("index.php?c=usuario&a=listar");
+        } else {
+            echo $resultado['mensagem'];
+        }
     }
 
-    // public function formulario(){
-    //     $this->template->layout("\\public\\usuario\\form.php");
-    // }
+    public function login()
+    {
+        $email = $_POST['email'] ?? '';
+        $senha = $_POST['senha'] ?? '';
 
-    // public function alterarForm(){
-    //     $id = $_GET["id"];
-    //     $service = new UsuarioService();
-    //     $resultado = $service->buscarUsuarioPorId($id);
+        $usuario = $this->usuarioService->fazerLogin($email, $senha);
+        if ($usuario) {
+            $_SESSION['usuario'] = $usuario;
+            $this->redirect("index.php?c=usuario&a=listar");
+        } else {
+            echo "Usuário ou senha inválidos!";
+        }
+    }
 
-    //     $this->template->layout("\\public\\usuario\\form.php", $resultado);
-    // }
+    public function logout()
+    {
+        session_destroy();
+        $this->redirect("index.php?c=usuario&a=form");
+    }
+
 }
+

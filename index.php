@@ -1,9 +1,22 @@
 <?php
 include "generic/Autoload.php";
 
-use generic\Controller;
+$controller = $_GET['c'] ?? 'usuario';
+$action = $_GET['a'] ?? 'form';
 
-if(isset($_GET["param"])){
-    $controller = new Controller([]);
-    $controlle->verificarChamadas($_GET["param"]);
+$controllerName = ucfirst($controller) . "Controller";
+$controllerFile = "controller/{$controllerName}.php";
+
+if (file_exists($controllerFile)) {
+    require_once $controllerFile;
+    $obj = new $controllerName();
+    if (method_exists($obj, $action)) {
+        $obj->$action();
+    } else {
+        echo "Ação não encontrada!";
+    }
+} else {
+    echo "Controller não encontrado!";
 }
+
+?>
