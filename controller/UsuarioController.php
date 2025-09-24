@@ -1,18 +1,22 @@
 <?php 
+namespace Controller;
 
-require_once "generic/Controller.php";
-require_once "service/UsuarioService.php";
-
+use service\UsuarioService;
+use Template\UsuarioTemp;
 use Generic\Controller;
 
 class UsuarioController extends Controller
 {
     private $usuarioService;
+    private $template;
 
     public function __construct()
     {
+        $this->template = new UsuarioTemp();
         $this->usuarioService = new UsuarioService();
+        if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start();
+    }
     }
 
     public function form()
@@ -28,25 +32,23 @@ class UsuarioController extends Controller
 
         $resultado = $this->usuarioService->cadastrarUsuario($nome, $email, $senha);
         if ($resultado['status']) {
-            $this->redirect("index.php?c=usuario&a=listar");
+            $usuario = $this->usuarioService->fazerLogin($email, $senha);
+            if($usuario){
+                $_SESSION['usuario'] = $usuario;
+                header("Location: public/Usuario/home.php");
+                exit;
+            }
         } else {
             echo $resultado['mensagem'];
         }
     }
 
-    public function login()
-    {
-        $email = $_POST['email'] ?? '';
-        $senha = $_POST['senha'] ?? '';
+    public function login($email, $senha){
 
-        $usuario = $this->usuarioService->fazerLogin($email, $senha);
-        if ($usuario) {
-            $_SESSION['usuario'] = $usuario;
-            $this->redirect("index.php?c=usuario&a=listar");
-        } else {
-            echo "Usuário ou senha inválidos!";
-        }
-    }
+        return $this->usuarioService->fazerLogin($email, $senha);
+
+   }
+
 
     public function logout()
     {

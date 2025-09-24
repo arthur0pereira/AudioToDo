@@ -9,7 +9,8 @@ $controllerFile = "controller/{$controllerName}.php";
 
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
-    $obj = new $controllerName();
+    $fqcn = "Controller\\{$controllerName}";
+    $obj = new $fqcn();
     if (method_exists($obj, $action)) {
         $obj->$action();
     } else {

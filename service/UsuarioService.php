@@ -1,4 +1,6 @@
 <?php 
+namespace service;
+
 use dao\IUsuarioDao;
 use dao\mysql\UsuarioDao;
 

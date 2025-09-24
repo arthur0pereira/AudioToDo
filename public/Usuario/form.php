@@ -17,19 +17,8 @@
         <input type="password" name="senha" required><br><br>
 
         <button type="submit">Cadastrar</button>
-    </form>
 
-    <hr>
-
-    <h2>Login</h2>
-    <form method="post" action="index.php?c=usuario&a=login">
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
-
-        <label>Senha:</label><br>
-        <input type="password" name="senha" required><br><br>
-
-        <button type="submit">Entrar</button>
+        <p>Já possui conta? <a href="/AudioToDo/public/Usuario/login.php">Clique aqui para logar</a></p>
     </form>
 </body>
 </html>
