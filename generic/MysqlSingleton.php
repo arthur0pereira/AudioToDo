@@ -43,4 +43,9 @@ class MysqlSingleton{
     public function isConnected(): bool {
         return self::$conexao !== null;
     }
+
+    public function getPdo()
+    {
+        return self::$conexao;
+    }
 }

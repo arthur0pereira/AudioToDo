@@ -19,25 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Home - Conversor</title>
-</head>
-<body>
-    <h2>Bem-vindo, <?php echo htmlspecialchars($usuario['nome']); ?>!</h2>
-
-    <form method="post">
-        <textarea name="texto" rows="5" cols="40" placeholder="Digite o texto para converter"></textarea><br><br>
-        <button type="submit">Converter para áudio</button>
-    </form>
-
-    <?php if (!empty($linkAudio)): ?>
-        <p>Arquivo gerado: <a href="<?php echo $linkAudio; ?>" download>Baixar áudio</a></p>
-    <?php endif; ?>
-
-    <p><a href="logout.php">Sair</a></p>
-</body>
+<html lang="pt-BR">
+<h2>Nova Conversão</h2>
+<form method="post" action="index.php?c=conversao&a=criar">
+    <textarea name="texto" required placeholder="Digite o texto aqui"></textarea><br><br>
+    <label>Voz:</label>
+    <select name="voz">
+        <option value="padrão">Padrão</option>
+        <option value="masculina">Masculina</option>
+        <option value="feminina">Feminina</option>
+    </select><br><br>
+    <button type="submit">Converter</button>
+</form>
 </html>
+
+

@@ -1,23 +1,20 @@
 <?php
-include "generic/Autoload.php";
+require_once __DIR__ . '/generic/Autoload.php';
 
-$controller = $_GET['c'] ?? 'usuario';
-$action = $_GET['a'] ?? 'form';
+$c = $_GET['c'] ?? 'usuario';
+$a = $_GET['a'] ?? 'form';
 
-$controllerName = ucfirst($controller) . "Controller";
-$controllerFile = "controller/{$controllerName}.php";
+$controllerName = ucfirst($c) . "Controller";
+$controllerNamespace = "Controller\\" . $controllerName;
 
-if (file_exists($controllerFile)) {
-    require_once $controllerFile;
-    $fqcn = "Controller\\{$controllerName}";
-    $obj = new $fqcn();
-    if (method_exists($obj, $action)) {
-        $obj->$action();
+if (class_exists($controllerNamespace)) {
+    $controller = new $controllerNamespace();
+
+    if (method_exists($controller, $a)) {
+        $controller->$a();
     } else {
-        echo "Ação não encontrada!";
+        echo "Ação não encontrada.";
     }
 } else {
-    echo "Controller não encontrado!";
+    echo "Controller não encontrado.";
 }
-
-?>
