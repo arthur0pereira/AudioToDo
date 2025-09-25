@@ -39,7 +39,14 @@ class UsuarioService
         return false;
     }
 
-  
+    public function atualizarUsuario($id, $nome, $email, $senha)
+    {
+        $ok = $this->usuarioDao->atualizarUsuario($id, $nome, $email, $senha);
+        if ($ok) {
+            return ['status' => true, 'mensagem' => 'Perfil atualizado!'];
+        }
+        return ['status' => false, 'mensagem' => 'Erro ao atualizar perfil.'];
+    }
 }
 
 

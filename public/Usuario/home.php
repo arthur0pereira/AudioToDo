@@ -12,31 +12,7 @@ $usuario = $_SESSION['usuario'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $texto = $_POST['texto'] ?? '';
     $voz = $_POST['voz'] ?? 'padrão';
-
-    if (!empty($texto)) {
-        // Exemplo de chamada para uma API local de TTS
-        $apiUrl = "http://localhost:8080/api/tts"; // ajuste conforme sua API
-        $postData = [
-            'text' => $texto,
-            'voice' => $voz
-        ];
-
-        $ch = curl_init($apiUrl);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $audioContent = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        if ($audioContent && $httpCode === 200) {
-            $arquivo = "audio_" . time() . ".mp3";
-            file_put_contents(__DIR__ . "/../../audios/" . $arquivo, $audioContent);
-            $linkAudio = "/AudioToDo/audios/" . $arquivo;
-        } else {
-            $erro = "Erro ao gerar áudio! (HTTP $httpCode)";
-        }
-    }
+    // posteriormente adicionar validações do texto e voz
 }
 ?>
 
@@ -48,6 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="home.css">
 </head>
 <body>
+    <div class="sidebar">
+        <h3>Menu</h3>
+        <ul>
+            <li><a href="/AudioToDo/public/Usuario/perfil.php">Perfil</a></li>
+            <li><a href="/AudioToDo/index.php?c=conversao&a=listar">Histórico de Conversões</a></li>
+        </ul>
+    </div>
+
     <div class="container">
         <h2>Nova Conversão</h2>
         <form method="post" action="">
@@ -62,15 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <button type="submit">Converter</button>
         </form>
-
-        <?php if (isset($linkAudio)): ?>
-            <h3>Ouça ou baixe seu áudio:</h3>
-            <audio controls src="<?= $linkAudio ?>"></audio>
-            <br>
-            <a href="<?= $linkAudio ?>" download>Baixar áudio</a>
-        <?php elseif (isset($erro)): ?>
-            <p class="erro"><?= $erro ?></p>
-        <?php endif; ?>
     </div>
+    <a href="/AudioToDo/public/Usuario/login.php">Sair</a>
 </body>
 </html>

@@ -30,15 +30,21 @@ class UsuarioDao extends MysqlFactory implements IUsuarioDao{
         return $result ? $result[0] : null;
     }
     
-    public function atualizarUsuario($id, $nome, $email, $senha){
-        $query = "UPDATE usuarios SET nome = :nome, email = :email, senha = :senha WHERE id = :id";
-        $param = [
+    public function atualizarUsuario($id, $nome, $email, $senha)
+    {
+        $params = [
             ':id' => $id,
             ':nome' => $nome,
-            ':email' => $email,
-            ':senha' => password_hash($senha, PASSWORD_BCRYPT)
+            ':email' => $email
         ];
-        return $this->banco->executar($query, $param);
+        $sql = "UPDATE usuarios SET nome = :nome, email = :email";
+        if (!empty($senha)) {
+            $sql .= ", senha = :senha";
+            $params[':senha'] = password_hash($senha, PASSWORD_DEFAULT);
+        }
+        $sql .= " WHERE id = :id";
+        $stmt = $this->banco->getPdo()->prepare($sql);
+        return $stmt->execute($params);
     }
 
 }

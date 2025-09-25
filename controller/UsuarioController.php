@@ -55,6 +55,25 @@ class UsuarioController extends Controller
         session_destroy();
         $this->redirect("index.php?c=usuario&a=form");
     }
+    public function atualizar()
+    {
+        $id = $_POST['id'] ?? '';
+        $nome = $_POST['nome'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $senha = $_POST['senha'] ?? '';
+
+        $resultado = $this->usuarioService->atualizarUsuario($id, $nome, $email, $senha);
+
+        if ($resultado['status']) {
+            // Atualiza os dados na sessão
+            $_SESSION['usuario']['nome'] = $nome;
+            $_SESSION['usuario']['email'] = $email;
+            header("Location: /AudioToDo/public/Usuario/perfil.php?msg=Perfil atualizado com sucesso!");
+            exit;
+        } else {
+            echo $resultado['mensagem'];
+        }
+    }
 
 }
 
