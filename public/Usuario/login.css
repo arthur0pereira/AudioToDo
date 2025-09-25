@@ -1,0 +1,108 @@
+/* Corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* fundo moderno */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Título */
+h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* Caixa do formulário */
+form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px; /* mais arredondado */
+    width: 350px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* sombra mais bonita */
+    border-top: 5px solid #6a11cb; /* detalhe no topo */
+    transition: transform 0.3s;
+}
+
+/* Efeito ao passar o mouse */
+form:hover {
+    transform: translateY(-3px); /* leve destaque */
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-bottom: 6px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Campos de texto */
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Foco no input */
+input:focus {
+    border-color: #2575fc;
+    box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+    outline: none;
+}
+
+/* Botão */
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.2s;
+}
+
+/* Hover no botão */
+button:hover {
+    opacity: 0.95;
+    transform: scale(1.02);
+}
+
+/* Texto abaixo */
+p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+a {
+    color: #2575fc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Mensagem de erro */
+.erro {
+    color: red;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-align: center;
+}  

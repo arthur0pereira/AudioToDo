@@ -15,17 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($texto)) {
         // Exemplo de chamada para uma API local de TTS
-        $apiUrl = "http://localhost:8080/api/tts"; // ajuste para o endpoint da sua API local
+        $apiUrl = "http://localhost:8080/api/tts"; // ajuste conforme sua API
         $postData = [
             'text' => $texto,
-            'voice' => $voz // ajuste conforme sua API
+            'voice' => $voz
         ];
 
         $ch = curl_init($apiUrl);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // Se a API retorna o áudio diretamente:
         $audioContent = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
@@ -40,27 +39,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
-<h2>Nova Conversão</h2>
-<form method="post" action="">
-    <textarea name="texto" required placeholder="Digite o texto aqui"></textarea><br><br>
-    <label>Voz:</label>
-    <select name="voz">
-        <option value="padrão">Padrão</option>
-        <option value="masculina">Masculina</option>
-        <option value="feminina">Feminina</option>
-    </select><br><br>
-    <button type="submit">Converter</button>
-</form>
-<?php if (isset($linkAudio)): ?>
-    <h3>Ouça ou baixe seu áudio:</h3>
-    <audio controls src="<?= $linkAudio ?>"></audio>
-    <br>
-    <a href="<?= $linkAudio ?>" download>Baixar áudio</a>
-<?php elseif (isset($erro)): ?>
-    <p style="color:red;"><?= $erro ?></p>
-<?php endif; ?>
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Conversão</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Nova Conversão</h2>
+        <form method="post" action="">
+            <textarea name="texto" required placeholder="Digite o texto aqui"></textarea>
+
+            <label>Voz:</label>
+            <select name="voz">
+                <option value="padrão">Padrão</option>
+                <option value="masculina">Masculina</option>
+                <option value="feminina">Feminina</option>
+            </select>
+
+            <button type="submit">Converter</button>
+        </form>
+
+        <?php if (isset($linkAudio)): ?>
+            <h3>Ouça ou baixe seu áudio:</h3>
+            <audio controls src="<?= $linkAudio ?>"></audio>
+            <br>
+            <a href="<?= $linkAudio ?>" download>Baixar áudio</a>
+        <?php elseif (isset($erro)): ?>
+            <p class="erro"><?= $erro ?></p>
+        <?php endif; ?>
+    </div>
+</body>
 </html>
-
-

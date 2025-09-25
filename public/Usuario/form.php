@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Usuários</title>
+    <link rel="stylesheet" href="form.css">
 </head>
 <body>
     <h2>Cadastro de Usuário</h2>
