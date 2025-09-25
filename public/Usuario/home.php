@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="container">
         <h2>Nova Conversão</h2>
-        <form method="post" action="">
+        <form method="post" action="/AudioToDo/index.php?c=conversao&a=criar">
             <textarea name="texto" required placeholder="Digite o texto aqui"></textarea>
 
             <label>Voz:</label>
@@ -47,6 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">Converter</button>
         </form>
     </div>
-    <a href="/AudioToDo/public/Usuario/login.php">Sair</a>
+    <a href="/AudioToDo/index.php?c=usuario&a=logout">Sair</a>
+
+    <?php if (isset($_GET['msg'])): ?>
+        <p style="color:green;"><?= htmlspecialchars($_GET['msg']) ?></p>
+    <?php endif; ?>
 </body>
 </html>

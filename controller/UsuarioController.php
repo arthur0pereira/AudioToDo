@@ -49,11 +49,10 @@ class UsuarioController extends Controller
 
    }
 
-
-    public function logout()
-    {
+    public function logout() {
         session_destroy();
-        $this->redirect("index.php?c=usuario&a=form");
+        header("Location: /AudioToDo/public/Usuario/login.php");
+        exit;
     }
     public function atualizar()
     {
@@ -65,13 +64,25 @@ class UsuarioController extends Controller
         $resultado = $this->usuarioService->atualizarUsuario($id, $nome, $email, $senha);
 
         if ($resultado['status']) {
-            // Atualiza os dados na sessão
             $_SESSION['usuario']['nome'] = $nome;
             $_SESSION['usuario']['email'] = $email;
             header("Location: /AudioToDo/public/Usuario/perfil.php?msg=Perfil atualizado com sucesso!");
             exit;
         } else {
             echo $resultado['mensagem'];
+        }
+    }
+    public function excluir()
+    {
+        $id = $_POST['id'] ?? '';
+        $ok = $this->usuarioService->excluirUsuario($id);
+
+        if ($ok) {
+            session_destroy();
+            header("Location: /AudioToDo/public/Usuario/login.php?msg=Conta excluída com sucesso!");
+            exit;
+        } else {
+            echo "Erro ao excluir usuário.";
         }
     }
 

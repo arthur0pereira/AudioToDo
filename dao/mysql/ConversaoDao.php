@@ -68,4 +68,15 @@ class ConversaoDao
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([':id' => $id]);
     }
+
+    public function atualizarConversao($id, $texto, $voz)
+    {
+        $sql = "UPDATE conversoes SET texto = :texto, voz_utilizada = :voz WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([
+            ':texto' => $texto,
+            ':voz' => $voz,
+            ':id' => $id
+        ]);
+    }
 }

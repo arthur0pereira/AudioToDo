@@ -47,6 +47,11 @@ class UsuarioService
         }
         return ['status' => false, 'mensagem' => 'Erro ao atualizar perfil.'];
     }
+
+    public function excluirUsuario($id)
+    {
+        return $this->usuarioDao->excluirUsuario($id);
+    }
 }
 
 

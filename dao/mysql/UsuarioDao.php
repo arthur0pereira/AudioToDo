@@ -6,14 +6,20 @@ use generic\MysqlFactory;
 
 class UsuarioDao extends MysqlFactory implements IUsuarioDao{
 
-    public function criarUsuario($nome, $email, $senha){
-        $query = "INSERT INTO usuarios (nome, email, senha) VALUES (:nome, :email, :senha)";
-        $param = [
-            ':nome' => $nome,
-            ':email' => $email,
-            ':senha' => password_hash($senha, PASSWORD_BCRYPT)
-        ];
-        return $this->banco->executar($query, $param);
+    public function criarUsuario($nome, $email, $senha)
+    {
+        try {
+            $sql = "INSERT INTO usuarios (nome, email, senha) VALUES (:nome, :email, :senha)";
+            $stmt = $this->banco->getPdo()->prepare($sql);
+            return $stmt->execute([
+                ':nome' => $nome,
+                ':email' => $email,
+                ':senha' => password_hash($senha, PASSWORD_DEFAULT)
+            ]);
+        } catch (\PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
     }
 
     public function buscarPorEmail($email){
@@ -45,6 +51,13 @@ class UsuarioDao extends MysqlFactory implements IUsuarioDao{
         $sql .= " WHERE id = :id";
         $stmt = $this->banco->getPdo()->prepare($sql);
         return $stmt->execute($params);
+    }
+
+    public function excluirUsuario($id)
+    {
+        $sql = "DELETE FROM usuarios WHERE id = :id";
+        $stmt = $this->banco->getPdo()->prepare($sql);
+        return $stmt->execute([':id' => $id]);
     }
 
 }

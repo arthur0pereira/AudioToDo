@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2>Cadastro de Usuário</h2>
-    <form method="post" action="index.php?c=usuario&a=salvar">
+    <form method="post" action="/AudioToDo/index.php?c=usuario&a=salvar">
         <label>Nome:</label><br>
         <input type="text" name="nome" required><br><br>
 

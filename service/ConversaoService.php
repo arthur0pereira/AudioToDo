@@ -31,4 +31,21 @@ class ConversaoService
     {
         return $this->dao->excluir($id);
     }
+
+    public function listarPorUsuario($usuarioId)
+    {
+        $conversoes = []; 
+        return $conversoes;
+    }
+
+    public function buscarPorId($id)
+    {
+        return $this->dao->buscarPorId($id);
+    }
+
+    public function atualizar($id, $texto, $voz)
+    {
+        return $this->dao->atualizarConversao($id, $texto, $voz);
+    }
+    
 }
