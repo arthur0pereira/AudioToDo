@@ -1,7 +1,6 @@
-/* Corpo da página */
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #6a11cb, #2575fc); /* fundo moderno */
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
   margin: 0;
   padding: 0;
   display: flex;
@@ -11,30 +10,26 @@ body {
   height: 100vh;
 }
 
-/* Título */
 h2 {
   text-align: center;
   color: white;
   margin-bottom: 20px;
 }
 
-/* Caixa do formulário */
 form {
   background-color: #fff;
   padding: 30px;
-  border-radius: 15px; /* mais arredondado */
+  border-radius: 15px;
   width: 350px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* sombra mais bonita */
-  border-top: 5px solid #6a11cb; /* detalhe no topo */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-top: 5px solid #6a11cb;
   transition: transform 0.3s;
 }
 
-/* Efeito ao passar o mouse */
 form:hover {
-  transform: translateY(-3px); /* leve destaque */
+  transform: translateY(-3px);
 }
 
-/* Labels */
 label {
   display: block;
   margin-bottom: 6px;
@@ -42,7 +37,6 @@ label {
   font-weight: bold;
 }
 
-/* Campos de texto */
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -55,14 +49,12 @@ input[type="password"] {
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-/* Foco no input */
 input:focus {
   border-color: #2575fc;
   box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
   outline: none;
 }
 
-/* Botão */
 button {
   width: 100%;
   padding: 12px;
@@ -76,13 +68,11 @@ button {
   transition: opacity 0.3s, transform 0.2s;
 }
 
-/* Hover no botão */
 button:hover {
   opacity: 0.95;
   transform: scale(1.02);
 }
 
-/* Texto abaixo */
 p {
   text-align: center;
   margin-top: 15px;

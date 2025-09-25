@@ -1,7 +1,6 @@
-/* Corpo da página */
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #6a11cb, #2575fc); /* fundo igual cadastro/login */
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
     margin: 0;
     padding: 0;
     display: flex;
@@ -10,14 +9,13 @@ body {
     min-height: 100vh;
 }
 
-/* Caixa de conversão */
 .container {
-    background-color: #fff;           /* caixa branca */
+    background-color: #fff;
     padding: 30px;
-    border-radius: 15px;              /* cantos arredondados */
+    border-radius: 15px;
     width: 400px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* sombra suave */
-    border-top: 5px solid #6a11cb;    /* detalhe superior roxo */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-top: 5px solid #6a11cb;
     text-align: center;
     transition: transform 0.3s;
 }
@@ -26,13 +24,11 @@ body {
     transform: translateY(-3px);
 }
 
-/* Título */
 h2 {
     margin-bottom: 20px;
     color: #333;
 }
 
-/* Labels */
 label {
     display: block;
     margin-bottom: 6px;
@@ -41,7 +37,6 @@ label {
     color: #444;
 }
 
-/* Textarea */
 textarea {
     width: 100%;
     padding: 10px;
@@ -60,7 +55,6 @@ textarea:focus {
     outline: none;
 }
 
-/* Select */
 select {
     width: 100%;
     padding: 10px;
@@ -77,7 +71,6 @@ select:focus {
     outline: none;
 }
 
-/* Botão */
 button {
     width: 100%;
     padding: 12px;
@@ -96,14 +89,12 @@ button:hover {
     transform: scale(1.02);
 }
 
-/* Mensagem de erro */
 .erro {
     color: red;
     margin-top: 10px;
     font-size: 14px;
 }
 
-/* Links e áudio */
 h3 {
     margin-top: 20px;
     color: #333;

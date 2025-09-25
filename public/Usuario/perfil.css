@@ -24,6 +24,7 @@ form {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     border-top: 5px solid #6a11cb;
     transition: transform 0.3s;
+    margin-bottom: 20px;
 }
 
 form:hover {
@@ -37,6 +38,7 @@ label {
     font-weight: bold;
 }
 
+input[type="text"],
 input[type="email"],
 input[type="password"] {
     width: 100%;
@@ -46,6 +48,7 @@ input[type="password"] {
     border-radius: 8px;
     font-size: 14px;
     transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
 }
 
 input:focus {
@@ -54,10 +57,23 @@ input:focus {
     outline: none;
 }
 
-button {
+button[type="submit"]:not([style*="background:red"]) {
     width: 100%;
     padding: 12px;
     background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.2s;
+}
+
+button[type="submit"][style*="background:red"] {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #ff416c, #ff4b2b);
     color: white;
     border: none;
     border-radius: 8px;
@@ -76,22 +92,17 @@ p {
     text-align: center;
     margin-top: 15px;
     font-size: 14px;
-    color: #333;
+    color: white;
 }
 
 a {
-    color: #2575fc;
+    color: white;
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s;
 }
 
 a:hover {
+    color: #e6e6e6;
     text-decoration: underline;
-}
-
-.erro {
-    color: red;
-    margin-bottom: 15px;
-    font-size: 14px;
-    text-align: center;
 }
