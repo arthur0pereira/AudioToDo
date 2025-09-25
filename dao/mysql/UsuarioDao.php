@@ -9,7 +9,7 @@ class UsuarioDao extends MysqlFactory implements IUsuarioDao{
     public function criarUsuario($nome, $email, $senha)
     {
         try {
-            $sql = "INSERT INTO usuarios (nome, email, senha) VALUES (:nome, :email, :senha)";
+            $sql = "INSERT INTO usuarios (nome, email, senha_hash) VALUES (:nome, :email, :senha)";
             $stmt = $this->banco->getPdo()->prepare($sql);
             return $stmt->execute([
                 ':nome' => $nome,

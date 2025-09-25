@@ -33,7 +33,7 @@ class UsuarioService
     public function fazerLogin($email, $senha)
     {
         $usuario = $this->usuarioDao->buscarPorEmail($email);
-        if ($usuario && password_verify($senha, $usuario['senha'])) {
+        if ($usuario && password_verify($senha, $usuario['senha_hash'])) {
             return $usuario;
         }
         return false;
