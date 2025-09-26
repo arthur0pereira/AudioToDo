@@ -8,7 +8,6 @@ if (!isset($_SESSION['usuario'])) {
 }
 $usuario = $_SESSION['usuario'];
 
-// O controller já envia $conversoes para o template
 ?>
 
 <!DOCTYPE html>
