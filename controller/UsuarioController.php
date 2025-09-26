@@ -59,7 +59,7 @@ class UsuarioController extends Controller
         $id = $_POST['id'] ?? '';
         $nome = $_POST['nome'] ?? '';
         $email = $_POST['email'] ?? '';
-        $senha = $_POST['senha'] ?? '';
+        $senha = $_POST['senha_hash'] ?? '';
 
         $resultado = $this->usuarioService->atualizarUsuario($id, $nome, $email, $senha);
 
