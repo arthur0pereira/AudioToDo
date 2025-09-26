@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h3>Menu</h3>
         <ul>
             <li><a href="/AudioToDo/public/Usuario/perfil.php">Perfil</a></li>
-            <li><a href="/AudioToDo/index.php?c=conversao&a=listar">Histórico de Conversões</a></li>
+            <li><a href="/AudioToDo/public/Conversao/editar.php">Histórico de Conversões</a></li>
         </ul>
     </div>
 

@@ -16,7 +16,7 @@ $usuario = $_SESSION['usuario'];
 <head>
     <meta charset="UTF-8">
     <title>Histórico de Conversões</title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="editar.css">
 </head>
 <body>
     <div class="sidebar">
