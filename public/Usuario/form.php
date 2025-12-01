@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Usuários</title>
-    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="../../css/usuario/form.css">
 </head>
 <body>
     <h2>Cadastro de Usuário</h2>
-    <form method="post" action="/AudioToDo/index.php?c=usuario&a=salvar">
+    <form method="post" action="/cadastroUsuario">
         <label>Nome:</label><br>
         <input type="text" name="nome" required><br><br>
 
@@ -19,7 +19,7 @@
 
         <button type="submit">Cadastrar</button>
 
-        <p>Já possui conta? <a href="/AudioToDo/public/Usuario/login.php">Clique aqui para logar</a></p>
+        <p>Já possui conta? <a href="/usuario/login">Clique aqui para logar</a></p>
     </form>
 </body>
 </html>
