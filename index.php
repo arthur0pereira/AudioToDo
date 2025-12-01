@@ -1,20 +1,16 @@
 <?php
-require_once __DIR__ . '/generic/Autoload.php';
+require 'generic/Autoload.php';
 
-$c = $_GET['c'] ?? 'usuario';
-$a = $_GET['a'] ?? 'form';
+use generic\Controller; 
 
-$controllerName = ucfirst($c) . "Controller";
-$controllerNamespace = "Controller\\" . $controllerName;
+$controller = new Controller();
+// die("ROTA RECEBIDA: " . ($_GET['url'] ?? 'nada'));
 
-if (class_exists($controllerNamespace)) {
-    $controller = new $controllerNamespace();
 
-    if (method_exists($controller, $a)) {
-        $controller->$a();
-    } else {
-        echo "Ação não encontrada.";
-    }
+if (isset($_GET["url"]) && $_GET["url"] !== "") {
+    $controller->verificarChamadas($_GET["url"]);
 } else {
-    echo "Controller não encontrado.";
+    // rota padrão → chama o formulário via CONTROLLER, não arquivo físico
+    header("Location: /usuario/form");
+    exit;
 }

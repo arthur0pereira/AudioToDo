@@ -4,10 +4,10 @@ namespace template;
 class UsuarioTemp implements ITemplate{
 
     public function cabecalho(){
-        echo "<div> Cabeçalho do usuário </div>";
+        echo "<div> Cabeçalho </div>";
     }
     public function rodape(){
-        echo "<div> Rodapé do usuário </div>";
+        echo "<div> Rodapé </div>";
     }
     public function layout($caminho, $parametro = null){
         $this->cabecalho();

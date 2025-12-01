@@ -1,9 +1,9 @@
 <?php 
-namespace Controller;
+namespace controller;
 
 use service\UsuarioService;
 use Template\UsuarioTemp;
-use Generic\Controller;
+use generic\Controller;
 
 class UsuarioController extends Controller
 {
@@ -19,39 +19,60 @@ class UsuarioController extends Controller
     }
     }
 
-    public function form()
-    {
-        $this->render("Usuario/form");
-    }
+    // public function form()
+    // {
+    //     $this->render("Usuario/form");
+    // }
 
     public function salvar()
     {
+        require_once "public/usuario/form.php";
+
         $nome = $_POST['nome'] ?? '';
         $email = $_POST['email'] ?? '';
         $senha = $_POST['senha'] ?? '';
 
         $resultado = $this->usuarioService->cadastrarUsuario($nome, $email, $senha);
         if ($resultado['status']) {
+
             $usuario = $this->usuarioService->fazerLogin($email, $senha);
-            if($usuario){
+
+            if ($usuario) {
                 $_SESSION['usuario'] = $usuario;
-                header("Location: public/Usuario/home.php");
+                header("Location: /public/Usuario/home");
                 exit;
             }
+        }
+
+        echo $resultado['mensagem'];
+    }
+
+    public function form()
+    {
+        require_once "public/usuario/form.php";
+    }
+
+
+    public function login()
+    {
+        $email = $_POST['email'] ?? '';
+        $senha = $_POST['senha'] ?? '';
+
+        $usuario = $this->usuarioService->fazerLogin($email, $senha);
+
+        if ($usuario) {
+            $_SESSION['usuario'] = $usuario;
+            header("Location: /public/Usuario/home.php");
+            exit;
         } else {
-            echo $resultado['mensagem'];
+            header("Location: /public/Usuario/login.php?erro=1");
+            exit;
         }
     }
 
-    public function login($email, $senha){
-
-        return $this->usuarioService->fazerLogin($email, $senha);
-
-   }
-
     public function logout() {
         session_destroy();
-        header("Location: /AudioToDo/public/Usuario/login.php");
+        header("Location: /public/Usuario/login");
         exit;
     }
     public function atualizar()

@@ -1,18 +1,30 @@
 <?php
-
 namespace generic;
 
-abstract class Controller
-{
-    protected function render($view, $data = [])
-    {
-        extract($data);
-        require_once "public/{$view}.php";
+class Controller{
+    private $arrChamadas = [];
+    public function __construct(){
+        
+        $this->arrChamadas = [
+            "usuario/form"      => new Acao("controller\\UsuarioController", "form"),
+            "usuario/salvar"    => new Acao("controller\\UsuarioController", "salvar"),
+            "usuario/atualizar" => new Acao("controller\\UsuarioController", "atualizar"),
+            "usuario/login"     => new Acao("controller\\UsuarioController", "login"),
+            "usuario/logout"    => new Acao("controller\\UsuarioController", "logout"),
+            "usuario/excluir"   => new Acao("controller\\UsuarioController", "excluir"),
+        ];    
     }
 
-    protected function redirect($url)
-    {
-        header("Location: {$url}");
-        exit;
+    public function verificarChamadas($rota){
+
+        if(isset($this->arrChamadas[$rota])){
+            // acao da rota
+            $acao = $this->arrChamadas[$rota];
+            $acao->executar();
+            return ;
+        }
+
+        echo "404 - Rota não encontrada!";
     }
 }
+

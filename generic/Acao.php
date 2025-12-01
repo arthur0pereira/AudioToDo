@@ -7,7 +7,7 @@ class Acao{
     private $metodo;
 
     public function __construct($classe, $metodo){
-        $this->classe = "controller\\" . $classe;
+        $this->classe = $classe;
         $this->metodo = $metodo;
     }
 

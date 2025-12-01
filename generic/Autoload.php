@@ -1,10 +1,11 @@
 <?php
-spl_autoload_register(function ($class) {
-    $file = __DIR__ . "/../" . str_replace("\\", "/", $class) . ".php";
-    // echo "<br>Testando: $file";
-    if (file_exists($file)) {
-        require_once $file;
-        return;
+
+spl_autoload_register(function ($classe) {
+
+    $classe = str_replace("\\", "/", $classe); 
+    $arquivo = __DIR__ . "/../" . $classe . ".php";
+
+    if (file_exists($arquivo)) {
+        require $arquivo;
     }
-    // echo "<br>Classe não encontrada: $class";
 });
