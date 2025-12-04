@@ -1,16 +1,14 @@
 <?php
+
 namespace generic;
 
-use PDO;
+use MysqlSingleton;
 
-class MysqlFactory{
-    public MysqlSingleton $banco;
-    public function __construct(){
-        $this->banco = MysqlSingleton::getInstance();
-
-    }
-    public function getConnection()
+class MysqlFactory
 {
-    return $this->banco->getPdo();
-}
+    public MysqlSingleton $banco;
+    public function __construct()
+    {
+        $this->banco = MysqlSingleton::getInstance();
+    }
 }

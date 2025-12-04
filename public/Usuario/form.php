@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Usuários</title>
+    <title>AudioToDo</title>
     <link rel="stylesheet" href="form.css">
 </head>
 <body>

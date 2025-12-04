@@ -2,17 +2,21 @@
 
 namespace generic;
 
-abstract class Controller
+class Controller
 {
-    protected function render($view, $data = [])
+    private $rotas = null;
+    public function __construct()
     {
-        extract($data);
-        require_once "public/{$view}.php";
+        $this->rotas = new Rotas();
     }
 
-    protected function redirect($url)
+    public function verificarChamadas($rota)
     {
-        header("Location: {$url}");
-        exit;
+        $retorno = $this->rotas->executar($rota);
+        if ($retorno) {
+            header("Content-Type: application/json");
+            $json = json_encode($retorno);
+            echo $json;
+        }
     }
 }

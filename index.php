@@ -1,20 +1,10 @@
 <?php
-require_once __DIR__ . '/generic/Autoload.php';
+include "generic/Autoload.php";
 
-$c = $_GET['c'] ?? 'usuario';
-$a = $_GET['a'] ?? 'form';
+include "imports/vendor/autoload.php";
 
-$controllerName = ucfirst($c) . "Controller";
-$controllerNamespace = "Controller\\" . $controllerName;
+use generic\Controller;
 
-if (class_exists($controllerNamespace)) {
-    $controller = new $controllerNamespace();
-
-    if (method_exists($controller, $a)) {
-        $controller->$a();
-    } else {
-        echo "Ação não encontrada.";
-    }
-} else {
-    echo "Controller não encontrado.";
-}
+$rota = $_GET["param"];
+$controller = new Controller();
+$controller->verificarChamadas($rota);

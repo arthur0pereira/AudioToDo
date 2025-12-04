@@ -1,51 +1,44 @@
 <?php
-namespace generic;
 
-class MysqlSingleton{
-    private static $conexao = null;
-    private static $instance;
+class MysqlSingleton
+{
+    private static ?MysqlSingleton $instance = null;
+    private $dsn = 'mysql:host=localhost;dbname=audiotodo';
+    private $usuario = "root";
+    private $senha = "";
+    private $options = null;
+    private $conn = null;
 
-    private function __construct(){
-        if(self::$conexao === null){
-            try{
-                $host = 'localhost';
-                $dbname = 'bd1';
-                $user = 'root'; 
-                $pass = ''; 
-                $dns = "mysql:host=$host;dbname=$dbname;charset=utf8";
-                self::$conexao = new \PDO($dns, $user, $pass);
-                self::$conexao->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-            }catch(\PDOException $e){
-                echo "Erro na conexão: " . $e->getMessage();
-            }
+
+    private function __construct()
+    {
+        if ($this->conn == null) {
+            $this->conn = new PDO($this->dsn, $this->usuario, $this->senha, $this->options);
         }
     }
 
-    public static function getInstance(): MysqlSingleton{
-        if(!isset(self::$instance)){
+    public static function getInstance()
+    {
+        if (self::$instance == null) {
             self::$instance = new MysqlSingleton();
         }
+
         return self::$instance;
     }
 
-    public function executar(string $query, array $param = []){
-        if(self::$conexao){
-            $sth = self::$conexao->prepare($query);
-            foreach($param as $k => $v){
+
+    public function executar($query, $param = array())
+    {
+
+
+        if ($this->conn) {
+            $sth = $this->conn->prepare($query);
+            foreach ($param as $k => $v) {
                 $sth->bindValue($k, $v);
             }
-            $sth->execute();
-            return $sth->fetchAll(\PDO::FETCH_ASSOC);
-        }
-        return false;
-    }
-    
-    public function isConnected(): bool {
-        return self::$conexao !== null;
-    }
 
-    public function getPdo()
-    {
-        return self::$conexao;
+            $sth->execute($param);
+            return $sth->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 }
